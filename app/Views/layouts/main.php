@@ -77,7 +77,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/users">
                                 <i class="fas fa-users"></i>
-                                <span>Pengguna</span>
+                                <span>Karyawan</span>
                             </a>
                         </li>
                         <?php if (session()->get('role') === 'admin'): ?>

@@ -1,13 +1,13 @@
 <?= $this->extend('layouts/main') ?>
 
-<?= $this->section('title') ?>Manajemen Pengguna<?= $this->endSection() ?>
+<?= $this->section('title') ?>Manajemen Karyawan<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Manajemen Pengguna</h1>
+    <h1 class="mt-4">Manajemen Karyawan</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item active">Manajemen Pengguna</li>
+        <li class="breadcrumb-item active">Manajemen Karyawan</li>
     </ol>
 
     <?php if (session()->has('success')) : ?>

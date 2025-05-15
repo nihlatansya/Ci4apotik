@@ -28,7 +28,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email">
+                            <small class="text-muted">Opsional untuk karyawan. Jika dikosongkan, akan menggunakan format: namakaryawan@sinamedika.com</small>
                         </div>
                     </div>
                 </div>
@@ -86,4 +87,45 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('role').addEventListener('change', function() {
+    const passwordField = document.getElementById('password');
+    const emailField = document.getElementById('email');
+    const passwordHelp = document.createElement('small');
+    const emailHelp = document.createElement('small');
+    
+    passwordHelp.className = 'text-muted';
+    emailHelp.className = 'text-muted';
+    
+    if (this.value === 'karyawan') {
+        passwordField.removeAttribute('required');
+        emailField.removeAttribute('required');
+        passwordHelp.textContent = 'Opsional untuk karyawan. Jika dikosongkan, akan menggunakan password default: karyawan123';
+        emailHelp.textContent = 'Opsional untuk karyawan. Jika dikosongkan, akan menggunakan format: namakaryawan@sinamedika.com';
+    } else {
+        passwordField.setAttribute('required', '');
+        emailField.setAttribute('required', '');
+        passwordHelp.textContent = '';
+        emailHelp.textContent = '';
+    }
+    
+    // Remove existing help text if any
+    const existingPasswordHelp = passwordField.nextElementSibling;
+    const existingEmailHelp = emailField.nextElementSibling;
+    if (existingPasswordHelp && existingPasswordHelp.tagName === 'SMALL') {
+        existingPasswordHelp.remove();
+    }
+    if (existingEmailHelp && existingEmailHelp.tagName === 'SMALL') {
+        existingEmailHelp.remove();
+    }
+    
+    // Add new help text
+    passwordField.parentNode.appendChild(passwordHelp);
+    emailField.parentNode.appendChild(emailHelp);
+});
+
+// Trigger change event on page load
+document.getElementById('role').dispatchEvent(new Event('change'));
+</script>
 <?= $this->endSection() ?>

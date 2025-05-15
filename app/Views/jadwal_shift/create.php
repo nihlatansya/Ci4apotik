@@ -53,7 +53,6 @@
                     <select class="form-control" id="jenis_shift" name="jenis_shift" required>
                         <option value="pagi">Pagi</option>
                         <option value="siang">Siang</option>
-                        <option value="malam">Malam</option>
                     </select>
                 </div>
 

@@ -3,12 +3,19 @@
 <?= $this->section('title') ?>Presensi<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="card-title mb-0">Data Presensi</h4>
-            <div class="d-flex gap-2 align-items-center">
-                <select class="form-select" id="bulan" style="width: auto;" onchange="filterByMonth()">
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Presensi</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Presensi</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-clock me-1"></i>
+            Data Presensi
+            <div class="float-end d-flex gap-2">
+                <select class="form-select form-select-sm" id="bulan" style="width: auto;" onchange="filterByMonth()">
                     <option value="01">Januari</option>
                     <option value="02">Februari</option>
                     <option value="03">Maret</option>
@@ -22,61 +29,62 @@
                     <option value="11">November</option>
                     <option value="12">Desember</option>
                 </select>
-                <a href="#" class="btn btn-success" onclick="exportCsv()">
+                <a href="#" class="btn btn-success btn-sm" onclick="exportCsv()">
                     <i class="fas fa-file-excel"></i> Export CSV
                 </a>
             </div>
         </div>
-
-        <!-- Loading Indicator -->
-        <div id="loadingIndicator" class="text-center d-none">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <div class="card-body">
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Memuat data...</p>
             </div>
-            <p class="mt-2">Memuat data...</p>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table table-striped" id="presensiTable">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Nama Karyawan</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Pulang</th>
-                        <th>Persentase</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1; ?>
-                    <?php foreach ($presensi as $row): ?>
+            <div class="table-responsive">
+                <table class="table table-striped" id="presensiTable">
+                    <thead>
                         <tr>
-                            <td><?= $i++; ?></td>
-                            <td><?= date('d-m-Y', strtotime($row['tanggal'])); ?></td>
-                            <td><?= $row['nama'] ?></td>
-                            <td><?= $row['jam_masuk'] ?></td>
-                            <td><?= $row['jam_pulang'] ?></td>
-                            <td><?= number_format($row['persentase'], 2); ?>%</td>
-                            <td>
-                                <span class="badge bg-<?= $row['keterangan'] === 'hadir' ? 'success' : ($row['keterangan'] === 'telat' ? 'warning' : 'danger') ?>">
-                                    <?= ucfirst($row['keterangan']) ?>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="/presensi/edit/<?= $row['id_presensi'] ?>" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="/presensi/delete/<?= $row['id_presensi'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Nama Karyawan</th>
+                            <th>Jam Masuk</th>
+                            <th>Jam Pulang</th>
+                            <th>Persentase</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($presensi as $row): ?>
+                            <tr>
+                                <td><?= $i++; ?></td>
+                                <td><?= date('d-m-Y', strtotime($row['tanggal'])); ?></td>
+                                <td><?= $row['nama'] ?></td>
+                                <td><?= $row['jam_masuk'] ?></td>
+                                <td><?= $row['jam_pulang'] ?></td>
+                                <td><?= number_format($row['persentase'], 2); ?>%</td>
+                                <td>
+                                    <span class="badge bg-<?= $row['keterangan'] === 'hadir' ? 'success' : ($row['keterangan'] === 'telat' ? 'warning' : 'danger') ?>">
+                                        <?= ucfirst($row['keterangan']) ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/presensi/edit/<?= $row['id_presensi'] ?>" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="/presensi/delete/<?= $row['id_presensi'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -205,10 +213,10 @@
         toast.setAttribute('role', 'alert');
         toast.setAttribute('aria-live', 'assertive');
         toast.setAttribute('aria-atomic', 'true');
-        
+
         // Set background and text color based on type
         let bgColor, textColor;
-        switch(type) {
+        switch (type) {
             case 'success':
                 bgColor = '#d4edda';
                 textColor = '#155724';
@@ -221,10 +229,10 @@
                 bgColor = '#cce5ff';
                 textColor = '#004085';
         }
-        
+
         toast.style.backgroundColor = bgColor;
         toast.style.color = textColor;
-        
+
         toast.innerHTML = `
             <div class="d-flex">
                 <div class="toast-body">
@@ -233,14 +241,14 @@
                 <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         `;
-        
+
         document.body.appendChild(toast);
         const bsToast = new bootstrap.Toast(toast, {
             autohide: true,
             delay: 3000
         });
         bsToast.show();
-        
+
         // Remove toast after it's hidden
         toast.addEventListener('hidden.bs.toast', () => {
             toast.remove();
@@ -252,39 +260,12 @@
         window.location.href = `/presensi/exportCsv/${bulan}`;
     }
 
-    function scanRfid() {
-        const rfid = document.getElementById('rfid').value;
-
-        fetch('/presensi/scanRfid', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    rfid: rfid
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    location.reload();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat memproses RFID');
-            });
-    }
+    // Initial load
+    filterByMonth();
 
     // Auto focus on RFID input when modal opens
     document.getElementById('rfidModal').addEventListener('shown.bs.modal', function() {
         document.getElementById('rfid').focus();
     });
-
-    // Initial load
-    filterByMonth();
 </script>
 <?= $this->endSection() ?>
