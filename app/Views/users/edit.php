@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select class="form-control" id="role" name="role" required>
@@ -58,12 +58,21 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="aktif" <?= $user['status'] == 'aktif' ? 'selected' : '' ?>>Aktif</option>
-                                <option value="nonaktif" <?= $user['status'] == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                                <option value="tidak aktif" <?= $user['status'] == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="gender">Jenis Kelamin</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="laki-laki" <?= $user['gender'] == 'laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
+                                <option value="perempuan" <?= $user['gender'] == 'perempuan' ? 'selected' : '' ?>>Perempuan</option>
                             </select>
                         </div>
                     </div>

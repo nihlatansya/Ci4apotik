@@ -31,7 +31,8 @@ class Users extends BaseController
             'email' => 'required|valid_email|is_unique[tb_user.email]',
             'password' => 'required|min_length[6]',
             'role' => 'required|in_list[admin,karyawan]',
-            'status' => 'required|in_list[aktif,nonaktif]'
+            'status' => 'required|in_list[aktif,tidak aktif]',
+            'gender' => 'required|in_list[laki-laki,perempuan]'
         ];
 
         if (!$this->validate($rules)) {
@@ -44,17 +45,20 @@ class Users extends BaseController
             'password' => md5($this->request->getPost('password')),
             'role' => $this->request->getPost('role'),
             'status' => $this->request->getPost('status'),
-            'id_kartu_rfid' => $this->request->getPost('id_kartu_rfid'),
-            'tb_jadwal_shift_id_jadwal_shift' => 1 // Default shift ID
+            'gender' => $this->request->getPost('gender'),
+            'id_kartu_rfid' => $this->request->getPost('id_kartu_rfid')
         ];
 
         $this->userModel->insert($data);
-        return redirect()->to('/users')->with('success', 'User berhasil ditambahkan');
+        return redirect()->to('/users')->with('success', 'Pengguna berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $data['user'] = $this->userModel->find($id);
+        if (!$data['user']) {
+            return redirect()->to('/users')->with('error', 'Pengguna tidak ditemukan');
+        }
         return view('users/edit', $data);
     }
 
@@ -64,7 +68,8 @@ class Users extends BaseController
             'nama' => 'required|min_length[3]',
             'email' => 'required|valid_email',
             'role' => 'required|in_list[admin,karyawan]',
-            'status' => 'required|in_list[aktif,nonaktif]'
+            'status' => 'required|in_list[aktif,tidak aktif]',
+            'gender' => 'required|in_list[laki-laki,perempuan]'
         ];
 
         if (!$this->validate($rules)) {
@@ -76,6 +81,7 @@ class Users extends BaseController
             'email' => $this->request->getPost('email'),
             'role' => $this->request->getPost('role'),
             'status' => $this->request->getPost('status'),
+            'gender' => $this->request->getPost('gender'),
             'id_kartu_rfid' => $this->request->getPost('id_kartu_rfid')
         ];
 
@@ -85,12 +91,17 @@ class Users extends BaseController
         }
 
         $this->userModel->update($id, $data);
-        return redirect()->to('/users')->with('success', 'User berhasil diupdate');
+        return redirect()->to('/users')->with('success', 'Pengguna berhasil diperbarui');
     }
 
     public function delete($id)
     {
+        // Prevent self-deletion
+        if ($id == session()->get('iduser')) {
+            return redirect()->to('/users')->with('error', 'Tidak dapat menghapus akun sendiri');
+        }
+
         $this->userModel->delete($id);
-        return redirect()->to('/users')->with('success', 'User berhasil dihapus');
+        return redirect()->to('/users')->with('success', 'Pengguna berhasil dihapus');
     }
 }

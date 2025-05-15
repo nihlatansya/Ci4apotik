@@ -8,7 +8,7 @@ class UserModel extends Model
 {
     protected $table = 'tb_user';
     protected $primaryKey = 'iduser';
-    protected $allowedFields = ['nama', 'id_kartu_rfid', 'role', 'status', 'password', 'gender', 'tb_jadwal_shift_id_jadwal_shift', 'email'];
+    protected $allowedFields = ['nama', 'id_kartu_rfid', 'role', 'status', 'email', 'password', 'gender'];
     protected $useTimestamps = false;
 
     public function verifyPassword($username, $password)

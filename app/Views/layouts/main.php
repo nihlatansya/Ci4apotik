@@ -65,10 +65,22 @@
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/presensi">Presensi</a>
+                            <a class="nav-link" href="/presensi">
+                                <i class="fas fa-clock"></i>
+                                <span>Presensi</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/jadwal-shift">Jadwal Shift</a>
+                            <a class="nav-link" href="/jadwal-shift">
+                                <i class="fas fa-calendar"></i>
+                                <span>Jadwal Shift</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i class="fas fa-users"></i>
+                                <span>Pengguna</span>
+                            </a>
                         </li>
                         <?php if (session()->get('role') === 'admin'): ?>
                             <li class="nav-item">
