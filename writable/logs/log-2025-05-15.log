@@ -738,3 +738,170 @@ JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], fals
 DEBUG - 2025-05-15 11:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-15 11:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-15 11:18:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-15 12:17:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-15 12:17:52 --> mysqli_sql_exception: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause' in C:\xampp\htdocs\medik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\medik\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tb_pres...', 0)
+#1 C:\xampp\htdocs\medik\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_pres...')
+#2 C:\xampp\htdocs\medik\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_pres...')
+#3 C:\xampp\htdocs\medik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_pres...', Array, false)
+#4 C:\xampp\htdocs\medik\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\medik\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\medik\app\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\medik\app\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+#8 C:\xampp\htdocs\medik\system\CodeIgniter.php(933): App\Controllers\Presensi->index()
+#9 C:\xampp\htdocs\medik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+#10 C:\xampp\htdocs\medik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\medik\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\medik\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\medik\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\medik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+CRITICAL - 2025-05-15 12:17:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+[Method: GET, Route: presensi]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+CRITICAL - 2025-05-15 12:17:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+CRITICAL - 2025-05-15 12:17:52 --> [Caused by] mysqli_sql_exception: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+DEBUG - 2025-05-15 12:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-15 12:18:14 --> mysqli_sql_exception: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause' in C:\xampp\htdocs\medik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\medik\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tb_pres...', 0)
+#1 C:\xampp\htdocs\medik\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_pres...')
+#2 C:\xampp\htdocs\medik\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_pres...')
+#3 C:\xampp\htdocs\medik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_pres...', Array, false)
+#4 C:\xampp\htdocs\medik\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\medik\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\medik\app\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\medik\app\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+#8 C:\xampp\htdocs\medik\system\CodeIgniter.php(933): App\Controllers\Presensi->index()
+#9 C:\xampp\htdocs\medik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+#10 C:\xampp\htdocs\medik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\medik\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\medik\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\medik\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\medik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+CRITICAL - 2025-05-15 12:18:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+[Method: GET, Route: presensi]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+CRITICAL - 2025-05-15 12:18:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+CRITICAL - 2025-05-15 12:18:14 --> [Caused by] mysqli_sql_exception: Unknown column 'tb_presensi.tb_user_iduser' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `tb_presensi`.*, `tb_user`.`nama`
+FROM `tb_presensi`
+JOIN `tb_user` ON `tb_user`.`iduser` = `tb_presensi`.`tb_user_iduser`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\PresensiModel.php(28): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Presensi.php(24): App\Models\PresensiModel->getPresensiWithUser()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Presensi->index()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Presensi))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\medik\\public\\index.php')
+DEBUG - 2025-05-15 12:34:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

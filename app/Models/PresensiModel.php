@@ -12,10 +12,9 @@ class PresensiModel extends Model
         'tanggal',
         'jam_masuk',
         'jam_pulang',
-        'persentase_kehadiran',
+        'keterangan',
         'dibuat_pada',
         'diupdate_pada',
-        'keterangan',
         'tb_user_iduser',
         'tb_jadwal_shift_id_jadwal_shift'
     ];
@@ -23,8 +22,9 @@ class PresensiModel extends Model
 
     public function getPresensiWithUser()
     {
-        return $this->select('tb_presensi.*, tb_user.nama')
+        return $this->select('tb_presensi.*, tb_user.nama, tb_jadwal_shift.jenis_shift')
             ->join('tb_user', 'tb_user.iduser = tb_presensi.tb_user_iduser')
+            ->join('tb_jadwal_shift', 'tb_jadwal_shift.id_jadwal_shift = tb_presensi.tb_jadwal_shift_id_jadwal_shift')
             ->findAll();
     }
 }
