@@ -8,9 +8,6 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="card-title mb-0">Data Presensi</h4>
             <div>
-                <a href="/presensi/create" class="btn btn-primary me-2">
-                    <i class="fas fa-plus"></i> Tambah Presensi
-                </a>
                 <a href="/presensi/exportCsv" class="btn btn-success">
                     <i class="fas fa-file-excel"></i> Export CSV
                 </a>

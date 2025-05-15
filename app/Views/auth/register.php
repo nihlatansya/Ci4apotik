@@ -11,6 +11,7 @@
                 <h4 class="text-center mb-4">Register</h4>
 
                 <form action="/processRegister" method="post">
+                    <?= csrf_field() ?>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
