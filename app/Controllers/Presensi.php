@@ -77,28 +77,39 @@ class Presensi extends BaseController
         return redirect()->to('/presensi')->with('success', 'Data presensi berhasil dihapus');
     }
 
-    public function exportCsv()
+    public function exportCsv($bulan = null)
     {
-        $presensi = $this->presensiModel->getPresensiWithUser();
+        // Jika bulan tidak diisi, gunakan bulan saat ini
+        if (!$bulan) {
+            $bulan = date('m');
+        }
 
-        $filename = 'presensi_' . date('Y-m-d') . '.csv';
+        // Ambil data presensi untuk bulan yang dipilih
+        $presensi = $this->presensiModel->getPresensiWithUser()
+            ->where('MONTH(tanggal)', $bulan)
+            ->where('YEAR(tanggal)', date('Y'))
+            ->findAll();
+
+        $filename = 'presensi_' . date('Y') . '_' . $bulan . '.csv';
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
 
         $output = fopen('php://output', 'w');
 
         // Add CSV headers
-        fputcsv($output, ['ID', 'Tanggal', 'Jam Masuk', 'Jam Pulang', 'Keterangan', 'Nama Karyawan']);
+        fputcsv($output, ['No', 'Tanggal', 'Nama Karyawan', 'Jam Masuk', 'Jam Pulang', 'Persentase', 'Keterangan']);
 
         // Add data rows
+        $no = 1;
         foreach ($presensi as $row) {
             fputcsv($output, [
-                $row['id_presensi'],
-                $row['tanggal'],
+                $no++,
+                date('d-m-Y', strtotime($row['tanggal'])),
+                $row['nama'],
                 $row['jam_masuk'],
                 $row['jam_pulang'],
-                $row['keterangan'],
-                $row['nama']
+                number_format($row['persentase'], 2) . '%',
+                $row['keterangan']
             ]);
         }
 
@@ -221,5 +232,15 @@ class Presensi extends BaseController
     {
         list($jam, $menit) = explode(':', $waktu);
         return ($jam * 60) + $menit;
+    }
+
+    public function getByMonth($bulan)
+    {
+        $presensi = $this->presensiModel->getPresensiWithUser()
+            ->where('MONTH(tanggal)', $bulan)
+            ->where('YEAR(tanggal)', date('Y'))
+            ->findAll();
+
+        return $this->response->setJSON($presensi);
     }
 }
