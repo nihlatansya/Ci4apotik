@@ -18,23 +18,26 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Tanggal</th>
                         <th>Nama Karyawan</th>
                         <th>Jam Masuk</th>
                         <th>Jam Pulang</th>
+                        <th>Persentase</th>
                         <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     <?php foreach ($presensi as $row): ?>
                         <tr>
-                            <td><?= $row['id_presensi'] ?></td>
-                            <td><?= $row['tanggal'] ?></td>
+                            <td><?= $i++; ?></td>
+                            <td><?= date('d-m-Y', strtotime($row['tanggal'])); ?></td>
                             <td><?= $row['nama'] ?></td>
                             <td><?= $row['jam_masuk'] ?></td>
                             <td><?= $row['jam_pulang'] ?></td>
+                            <td><?= number_format($row['persentase'], 2); ?>%</td>
                             <td>
                                 <span class="badge bg-<?= $row['keterangan'] === 'hadir' ? 'success' : ($row['keterangan'] === 'telat' ? 'warning' : 'danger') ?>">
                                     <?= ucfirst($row['keterangan']) ?>

@@ -36,7 +36,12 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="jam_pulang" class="form-label">Jam Pulang</label>
-                        <input type="time" class="form-control" id="jam_pulang" name="jam_pulang" value="<?= $presensi['jam_pulang'] ?>">
+                        <input type="time" class="form-control" id="jam_pulang" name="jam_pulang" value="<?= $presensi['jam_pulang']; ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="persentase" class="form-label">Persentase</label>
+                        <input type="text" class="form-control" id="persentase" value="<?= number_format($presensi['persentase'], 2); ?>%" readonly>
                     </div>
 
                     <div class="mb-3">

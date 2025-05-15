@@ -109,28 +109,117 @@ class Presensi extends BaseController
     public function scanRfid()
     {
         $rfid = $this->request->getPost('rfid');
+
+        // Cari user berdasarkan id_kartu_rfid
         $user = $this->userModel->where('id_kartu_rfid', $rfid)->first();
-        
-        if ($user) {
-            // Get user's current shift
-            $shift = $this->jadwalShiftModel->find($user['tb_jadwal_shift_id_jadwal_shift']);
-            
-            if ($shift) {
-                $data = [
-                    'tanggal' => date('Y-m-d'),
-                    'jam_masuk' => date('H:i:s'),
-                    'keterangan' => 'hadir',
-                    'tb_user_iduser' => $user['iduser'],
-                    'tb_jadwal_shift_id_jadwal_shift' => $user['tb_jadwal_shift_id_jadwal_shift'],
-                    'dibuat_pada' => date('Y-m-d H:i:s'),
-                    'diupdate_pada' => date('Y-m-d H:i:s')
-                ];
-                
-                $this->presensiModel->insert($data);
-                return $this->response->setJSON(['success' => true, 'message' => 'Presensi berhasil dicatat']);
-            }
+
+        if (!$user) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Kartu tidak terdaftar'
+            ]);
         }
-        
-        return $this->response->setJSON(['success' => false, 'message' => 'RFID tidak ditemukan']);
+
+        // Cek apakah user memiliki jadwal shift
+        if (!$user['id_jadwal_shift']) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'User tidak memiliki jadwal shift'
+            ]);
+        }
+
+        // Ambil jadwal shift user
+        $jadwalShift = $this->jadwalShiftModel->find($user['id_jadwal_shift']);
+
+        // Cek apakah hari ini adalah hari kerja
+        $hariIni = date('N'); // 1 (Senin) sampai 7 (Minggu)
+        if (!in_array($hariIni, explode(',', $jadwalShift['hari']))) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Hari ini bukan hari kerja Anda'
+            ]);
+        }
+
+        // Cek apakah sudah ada presensi hari ini
+        $today = date('Y-m-d');
+        $existingPresensi = $this->presensiModel->where([
+            'tb_user_iduser' => $user['iduser'],
+            'tanggal' => $today
+        ])->first();
+
+        $currentTime = date('H:i:s');
+
+        if ($existingPresensi) {
+            // Update jam pulang
+            $this->presensiModel->update($existingPresensi['id_presensi'], [
+                'jam_pulang' => $currentTime,
+                'persentase' => $this->hitungPersentase($jadwalShift['shift_mulai'], $jadwalShift['shift_selesai'], $existingPresensi['jam_masuk'], $currentTime)
+            ]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Jam pulang berhasil dicatat',
+                'data' => [
+                    'nama' => $user['nama'],
+                    'jam_pulang' => $currentTime
+                ]
+            ]);
+        } else {
+            // Buat presensi baru
+            $this->presensiModel->insert([
+                'tanggal' => $today,
+                'jam_masuk' => $currentTime,
+                'tb_user_iduser' => $user['iduser'],
+                'tb_jadwal_shift_id_jadwal_shift' => $user['id_jadwal_shift'],
+                'persentase' => $this->hitungPersentase($jadwalShift['shift_mulai'], $jadwalShift['shift_selesai'], $currentTime, null)
+            ]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Jam masuk berhasil dicatat',
+                'data' => [
+                    'nama' => $user['nama'],
+                    'jam_masuk' => $currentTime
+                ]
+            ]);
+        }
+    }
+
+    private function hitungPersentase($shiftMulai, $shiftSelesai, $jamMasuk, $jamPulang = null)
+    {
+        // Konversi waktu ke menit untuk perhitungan
+        $shiftMulaiMenit = $this->waktuKeMenit($shiftMulai);
+        $shiftSelesaiMenit = $this->waktuKeMenit($shiftSelesai);
+        $jamMasukMenit = $this->waktuKeMenit($jamMasuk);
+
+        // Hitung total durasi shift dalam menit
+        $totalDurasiShift = $shiftSelesaiMenit - $shiftMulaiMenit;
+
+        // Hitung keterlambatan masuk (dalam menit)
+        $keterlambatanMasuk = max(0, $jamMasukMenit - $shiftMulaiMenit);
+
+        // Jika sudah ada jam pulang, hitung juga keterlambatan pulang
+        if ($jamPulang) {
+            $jamPulangMenit = $this->waktuKeMenit($jamPulang);
+            $keterlambatanPulang = max(0, $shiftSelesaiMenit - $jamPulangMenit);
+        } else {
+            $keterlambatanPulang = 0;
+        }
+
+        // Hitung total keterlambatan
+        $totalKeterlambatan = $keterlambatanMasuk + $keterlambatanPulang;
+
+        // Hitung persentase kehadiran
+        // Rumus: ((Total Durasi Shift - Total Keterlambatan) / Total Durasi Shift) * 100
+        $persentase = (($totalDurasiShift - $totalKeterlambatan) / $totalDurasiShift) * 100;
+
+        // Batasi persentase antara 0 dan 100
+        return max(0, min(100, round($persentase, 2)));
+    }
+
+    private function waktuKeMenit($waktu)
+    {
+        list($jam, $menit) = explode(':', $waktu);
+        return ($jam * 60) + $menit;
     }
 }

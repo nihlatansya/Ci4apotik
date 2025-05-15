@@ -20,10 +20,17 @@ class CreateTbPresensiTable extends Migration
             ],
             'jam_masuk' => [
                 'type' => 'TIME',
+                'null' => true,
             ],
             'jam_pulang' => [
                 'type' => 'TIME',
                 'null' => true,
+            ],
+            'persentase' => [
+                'type' => 'DECIMAL',
+                'constraint' => '5,2',
+                'null' => true,
+                'default' => 0.00,
             ],
             'keterangan' => [
                 'type'       => 'VARCHAR',
