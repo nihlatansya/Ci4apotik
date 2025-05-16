@@ -1,5 +1,6 @@
 <?= $this->extend('layouts/main') ?>
 
+<<<<<<< HEAD
 <?= $this->section('title') ?>Manajemen Pengguna<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -8,6 +9,16 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
         <li class="breadcrumb-item active">Manajemen Pengguna</li>
+=======
+<?= $this->section('title') ?>Manajemen Karyawan<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Manajemen Karyawan</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Manajemen Karyawan</li>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
     </ol>
 
     <?php if (session()->has('success')) : ?>

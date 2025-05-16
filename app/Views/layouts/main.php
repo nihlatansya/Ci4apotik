@@ -7,6 +7,10 @@
     <title>Sina Medika - <?= $this->renderSection('title') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<<<<<<< HEAD
+=======
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
     <style>
         :root {
             --primary-color: #0d6efd;
@@ -62,9 +66,12 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
+<<<<<<< HEAD
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
+=======
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                             <a class="nav-link" href="/presensi">
                                 <i class="fas fa-clock"></i>
                                 <span>Presensi</span>
@@ -79,7 +86,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/users">
                                 <i class="fas fa-users"></i>
+<<<<<<< HEAD
                                 <span>Pengguna</span>
+=======
+                                <span>Karyawan</span>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                             </a>
                         </li>
                         <?php if (session()->get('role') === 'admin'): ?>
@@ -115,6 +126,18 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Pilih karyawan...",
+                allowClear: true
+            });
+        });
+    </script>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
     <?= $this->renderSection('scripts') ?>
 </body>
 

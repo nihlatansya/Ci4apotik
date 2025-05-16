@@ -9,23 +9,41 @@
             <div class="card-body p-5">
                 <h2 class="text-center mb-4">Sina Medika</h2>
                 <h4 class="text-center mb-4">Login</h4>
+<<<<<<< HEAD
                 
                 <form action="/login" method="post">
+=======
+
+                <form action="/login" method="post">
+                    <?= csrf_field() ?>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
                     </div>
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                 <div class="text-center mt-3">
                     <p>Belum punya akun? <a href="/register">Daftar disini</a></p>
                 </div>
@@ -33,4 +51,8 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <?= $this->endSection() ?> 
+=======
+<?= $this->endSection() ?>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da

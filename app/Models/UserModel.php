@@ -8,8 +8,15 @@ class UserModel extends Model
 {
     protected $table = 'tb_user';
     protected $primaryKey = 'iduser';
+<<<<<<< HEAD
     protected $allowedFields = ['nama', 'id_kartu_rfid', 'role', 'status', 'email', 'password', 'gender'];
     protected $useTimestamps = false;
+=======
+    protected $allowedFields = ['nama', 'email', 'password', 'role', 'status', 'gender', 'id_kartu_rfid', 'id_jadwal_shift'];
+    protected $useTimestamps = true;
+    protected $createdField = 'dibuat_pada';
+    protected $updatedField = 'diupdate_pada';
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
 
     public function verifyPassword($username, $password)
     {
@@ -19,4 +26,41 @@ class UserModel extends Model
         }
         return false;
     }
+<<<<<<< HEAD
+=======
+
+    public function beforeInsert(array $data)
+    {
+        // Jika role karyawan dan password kosong, set password default
+        if ($data['data']['role'] === 'karyawan') {
+            if (empty($data['data']['password'])) {
+                $data['data']['password'] = password_hash('karyawan123', PASSWORD_DEFAULT);
+            }
+            if (empty($data['data']['email'])) {
+                $data['data']['email'] = strtolower(str_replace(' ', '', $data['data']['nama'])) . '@sinamedika.com';
+            }
+        } else if (!empty($data['data']['password'])) {
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+        }
+        return $data;
+    }
+
+    public function beforeUpdate(array $data)
+    {
+        // Jika password diisi, hash password
+        if (!empty($data['data']['password'])) {
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+        } else {
+            // Jika password kosong, hapus dari data yang akan diupdate
+            unset($data['data']['password']);
+        }
+
+        // Jika role karyawan dan email kosong, set email default
+        if ($data['data']['role'] === 'karyawan' && empty($data['data']['email'])) {
+            $data['data']['email'] = strtolower(str_replace(' ', '', $data['data']['nama'])) . '@sinamedika.com';
+        }
+
+        return $data;
+    }
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
 }

@@ -34,6 +34,10 @@
                         <th>Shift Mulai</th>
                         <th>Shift Selesai</th>
                         <th>Jenis Shift</th>
+<<<<<<< HEAD
+=======
+                        <th>Karyawan</th>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -47,6 +51,20 @@
                             <td><?= $shift['shift_selesai'] ?></td>
                             <td><?= ucfirst($shift['jenis_shift']) ?></td>
                             <td>
+<<<<<<< HEAD
+=======
+                                <?php if (!empty($shift['users'])): ?>
+                                    <ul class="list-unstyled mb-0">
+                                        <?php foreach ($shift['users'] as $user): ?>
+                                            <li><?= $user['nama'] ?> (<?= $user['role'] ?>)</li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <span class="text-muted">Belum ada karyawan</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
                                 <a href="/jadwal-shift/edit/<?= $shift['id_jadwal_shift'] ?>" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>

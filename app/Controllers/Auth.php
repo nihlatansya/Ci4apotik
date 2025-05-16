@@ -33,7 +33,11 @@ class Auth extends BaseController
                 'logged_in' => true
             ];
             session()->set($sessionData);
+<<<<<<< HEAD
             return redirect()->to('/dashboard');
+=======
+            return redirect()->to('/presensi');
+>>>>>>> b265b755a65f585b5ed6e3087633f37ee5c2a3da
         }
 
         return redirect()->back()->with('error', 'Username atau password salah');
